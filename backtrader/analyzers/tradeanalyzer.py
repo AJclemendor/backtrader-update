@@ -74,7 +74,7 @@ class TradeAnalyzer(Analyzer):
         _cp = self.strategy.broker.getvalue() - 100000000
         _t = self.datas[0].datetime.datetime().hour
         
-        self.rets.totalmax_pl_hourly[_t] = max(self.max_pl_hourly[_t], _cp)
+        self.rets.total.max_pl_hourly[_t] = max(self.max_pl_hourly[_t], _cp)
         self.rets.total.min_pl_hourly[_t] = min(self.min_pl_hourly[_t], _cp)
 
 
