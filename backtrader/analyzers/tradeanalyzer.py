@@ -87,9 +87,6 @@ class TradeAnalyzer(Analyzer):
         self.rets.total.pl_min_dict = self.min_pl_hourly
 
     def stop(self):
-
-        print("123" * 100)
-
         super(TradeAnalyzer, self).stop()
         self.rets._close()
 
