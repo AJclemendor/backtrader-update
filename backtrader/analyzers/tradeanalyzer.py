@@ -65,11 +65,31 @@ class TradeAnalyzer(Analyzer):
         - dictname['total']['total'] which will have a value of 0 (the field is
           also reachable with dot notation dictname.total.total
     '''
+
+    # def __init__(self):
+    #     self.max_pl_hourly = {i: 0 for i in range(5, 15)}
+    #     self.min_pl_hourly = {i: 0 for i in range(5, 15)}
+        
+    def next(self):
+        _cp = self.strategy.broker.getvalue() - 100000000
+        _t = self.datas[0].datetime.datetime().hour
+        
+        self.rets.totalmax_pl_hourly[_t] = max(self.max_pl_hourly[_t], _cp)
+        self.rets.total.min_pl_hourly[_t] = min(self.min_pl_hourly[_t], _cp)
+
+
     def create_analysis(self):
         self.rets = AutoOrderedDict()
         self.rets.total.total = 0
+        self.max_pl_hourly = {i: 0 for i in range(5, 15)}
+        self.min_pl_hourly = {i: 0 for i in range(5, 15)}
+        self.rets.total.pl_max_dict = self.max_pl_hourly
+        self.rets.total.pl_min_dict = self.min_pl_hourly
 
     def stop(self):
+
+        print("123" * 100)
+
         super(TradeAnalyzer, self).stop()
         self.rets._close()
 
